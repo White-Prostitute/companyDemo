@@ -17,7 +17,7 @@ public class Note {
     private int offset;
 
     public int getMidi() {
-        return midi;
+        return midi+ 12 * offset;
     }
 
     public void setMidi(int midi) {
@@ -37,7 +37,7 @@ public class Note {
     }
 
     public int getVolume() {
-        return volume + 12 * offset;
+        return volume;
     }
 
     public void setVolume(int volume) {

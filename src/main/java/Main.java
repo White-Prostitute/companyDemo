@@ -1,11 +1,11 @@
 import media.MediaPlayer;
 import media.Note;
 import media.builder.MediaBuilder;
+import media.builder.NotesCsvLoader;
 import media.builder.SimpleQuarterNoteBuilder;
 import media.major.CMajor;
 import media.major.DMajor;
 import media.major.EMajor;
-import util.MediaUtil;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
@@ -17,8 +17,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        byte[] bytes = new byte[]{62, 59, 43, 50, 62, 57, 54, 57, 62, 55};
-        MediaUtil.playWithArrayData(bytes);
+//        byte[] bytes = new byte[]{62, 59, 43, 50, 62, 57, 54, 57, 62, 55};
+        List<Note> notes = NotesCsvLoader.loadNotesFromCsv("/Users/mac/Downloads/spring-demo/spring-demo/src/main/resources/music/test.csv",
+                new CMajor());
+        Sequence sequence = MediaBuilder.build(notes);
+        MediaPlayer.play(sequence);
     }
 
 
