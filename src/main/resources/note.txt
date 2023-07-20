@@ -1,0 +1,68 @@
+Java可以使用javax.sound.midi包中的类来生成MIDI文件。具体步骤如下：
+
+1. 创建一个Sequence对象，用于存储MIDI音符序列。
+
+```java
+Sequence sequence = new Sequence(Sequence.PPQ, 24);
+```
+
+2. 创建一个Track对象，用于存储MIDI音符事件。
+
+```java
+Track track = sequence.createTrack();
+```
+
+3. 创建MIDI音符事件，并将其添加到Track对象中。
+
+```java
+ShortMessage noteOn = new ShortMessage(ShortMessage.NOTE_ON, 0, 60, 93);
+MidiEvent noteOnEvent = new MidiEvent(noteOn, 0);
+track.add(noteOnEvent);
+
+ShortMessage noteOff = new ShortMessage(ShortMessage.NOTE_OFF, 0, 60, 0);
+MidiEvent noteOffEvent = new MidiEvent(noteOff, 96);
+track.add(noteOffEvent);
+```
+
+4. 创建一个Sequencer对象，并将Sequence对象设置为其播放的序列。
+
+```java
+Sequencer sequencer = MidiSystem.getSequencer();
+sequencer.setSequence(sequence);
+```
+
+5. 将Sequence对象写入MIDI文件。
+
+```java
+File file = new File("output.mid");
+MidiSystem.write(sequence, 1, file);
+```
+
+完整的代码示例：
+
+```java
+import javax.sound.midi.*;
+
+public class MidiGenerator {
+    public static void main(String[] args) throws Exception {
+        Sequence sequence = new Sequence(Sequence.PPQ, 24);
+        Track track = sequence.createTrack();
+
+        ShortMessage noteOn = new ShortMessage(ShortMessage.NOTE_ON, 0, 60, 93);
+        MidiEvent noteOnEvent = new MidiEvent(noteOn, 0);
+        track.add(noteOnEvent);
+
+        ShortMessage noteOff = new ShortMessage(ShortMessage.NOTE_OFF, 0, 60, 0);
+        MidiEvent noteOffEvent = new MidiEvent(noteOff, 96);
+        track.add(noteOffEvent);
+
+        Sequencer sequencer = MidiSystem.getSequencer();
+        sequencer.setSequence(sequence);
+
+        File file = new File("output.mid");
+        MidiSystem.write(sequence, 1, file);
+    }
+}
+```
+
+运行该程序后，会在当前目录下生成一个名为output.mid的MIDI文件。

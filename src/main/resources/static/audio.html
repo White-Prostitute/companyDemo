@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="play()">play</button>
+</body>
+
+<script>
+  function play(){
+    // 创建一个AudioContext对象
+    var audioContext = new AudioContext();
+
+// 创建一个OscillatorNode节点
+    var oscillator = audioContext.createOscillator();
+    oscillator.type = 'square'; // 指定波形类型
+    oscillator.frequency.value = 340; // 指定频率
+    oscillator.connect(audioContext.destination); // 连接到输出节点
+    oscillator.start(); // 开始播放
+    setTimeout(function (){
+      oscillator.stop();
+    }, 1000)
+  }
+</script>
+</html>
