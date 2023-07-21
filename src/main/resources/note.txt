@@ -66,3 +66,31 @@ public class MidiGenerator {
 ```
 
 运行该程序后，会在当前目录下生成一个名为output.mid的MIDI文件。
+
+
+
+
+要加载音色库文件，可以使用 `Soundbank` 和 `Synthesizer` 接口。首先，需要使用 `MidiSystem` 类的 `getSoundbank()` 方法加载音色库文件，然后使用 `Synthesizer` 接口的 `loadAllInstruments()` 方法将音色库中的所有乐器加载到 `Synthesizer` 中。修改后的代码如下：
+
+```java
+{
+        try (Sequencer sequencer = MidiSystem.getSequencer()) {
+            sequencer.open();
+            sequencer.setSequence(sequence);
+            Synthesizer synthesizer = MidiSystem.getSynthesizer();
+            Soundbank soundbank = MidiSystem.getSoundbank(new File("path/to/soundbank.sf2"));
+            synthesizer.loadAllInstruments(soundbank);
+            MidiChannel[] channels = synthesizer.getChannels();
+            sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
+            sequencer.start();
+            while (sequencer.isRunning()){
+                Thread.sleep(1000);
+            }
+            sequencer.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+其中，`path/to/soundbank.sf2` 需要替换为实际的音色库文件路径。

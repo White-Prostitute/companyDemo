@@ -4,6 +4,7 @@ import media.builder.MediaBuilder;
 import media.builder.NotesCsvLoader;
 import media.builder.SimpleQuarterNoteBuilder;
 import media.scale.major.*;
+import media.scale.minor.CMinor;
 import media.scale.minor.CusMinor;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -19,10 +20,9 @@ public class Main {
 //        byte[] bytes = new byte[]{62, 59, 43, 50, 62, 57, 54, 57, 62, 55};
 //        List<Note> notes = NotesCsvLoader.loadFromPath("/Users/mac/Downloads/spring-demo/spring-demo/src/main/resources/music/test.csv",
 //                new CScale());
-        List<Note> notes = NotesCsvLoader.loadFromResource("/music/little_start.csv",new CusMinor(60));
+        List<Note> notes = NotesCsvLoader.loadFromResource("/music/sunday.csv",new GMajor());
         Sequence sequence = MediaBuilder.build(notes);
         MediaPlayer.play(sequence);
-
     }
 
 
