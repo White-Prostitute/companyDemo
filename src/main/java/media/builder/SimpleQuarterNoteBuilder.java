@@ -2,7 +2,7 @@ package media.builder;
 
 import media.Note;
 import media.enums.NoteDurationEnum;
-import media.major.Major;
+import media.scale.Scale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ public class SimpleQuarterNoteBuilder implements NoteBuilder{
     }
 
     @Override
-    public List<Note> build(List<?> list, Major major) {
+    public List<Note> build(List<?> list, Scale scale) {
         List<Note> res = new ArrayList<>();
         for (Object o : list) {
             if(o instanceof Integer){
                 Note note = new Note();
-                note.setMidi(major.convert((Integer) o));
+                note.setMidi(scale.convert((Integer) o));
                 note.setVolume(DEFAULT_VOLUME);
                 note.setDurationEnum(NoteDurationEnum.EIGHTH);
                 res.add(note);

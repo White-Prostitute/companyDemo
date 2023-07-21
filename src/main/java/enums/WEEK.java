@@ -1,6 +1,8 @@
 package enums;
 
-public enum WEEK {
+import java.lang.annotation.Annotation;
+
+public enum WEEK{
 
     MONDAY(1),FRIDAY(5);
 

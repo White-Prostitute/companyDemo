@@ -1,13 +1,13 @@
 package media.builder;
 
 import media.Note;
-import media.major.Major;
+import media.scale.Scale;
 
 import java.util.List;
 
 public interface NoteBuilder {
 
-    List<Note> build(List<?> list, Major major);
+    List<Note> build(List<?> list, Scale scale);
 
 
 }
